@@ -33,3 +33,5 @@ CREATE TABLE `test_entity`
 To reproduce the error run `./gradlew test`. The `WorkingSpec` class uses a flyway migration without uft8 settings and
 the `FailingSpec` class uses a flyway migration with uft8 settings.
 
+To see that everything was working fine on micronaut 1.3.7 (micronaut-data 1.0.1) check out the `mn-1.3.7` branch and run
+the tests.
