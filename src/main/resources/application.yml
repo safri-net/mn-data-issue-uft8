@@ -1,0 +1,15 @@
+micronaut:
+  application:
+    name: demo
+datasources:
+  default:
+    url: jdbc:mariadb://localhost:${db.port:3306}/test?useMysqlMetadata=true
+    driverClassName: org.mariadb.jdbc.Driver
+    username: root
+    password: ''
+    schema-generate: NONE
+    dialect: MYSQL
+flyway:
+  datasources:
+    default:
+      locations: classpath:databasemigrations/${migration.dir}
