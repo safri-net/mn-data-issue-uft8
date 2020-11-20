@@ -32,4 +32,3 @@ CREATE TABLE `test_entity`
 
 To reproduce the error run `./gradlew test`. The `WorkingSpec` class uses a flyway migration without uft8 settings and
 the `FailingSpec` class uses a flyway migration with uft8 settings.
-

@@ -1,7 +1,7 @@
 package com.example
 
 import io.micronaut.context.annotation.Property
-import io.micronaut.test.extensions.spock.annotation.MicronautTest
+import io.micronaut.test.annotation.MicronautTest
 import io.micronaut.test.support.TestPropertyProvider
 import org.testcontainers.containers.MariaDBContainer
 import spock.lang.AutoCleanup

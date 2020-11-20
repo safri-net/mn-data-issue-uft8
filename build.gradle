@@ -1,7 +1,6 @@
 plugins {
     id "groovy"
     id "com.github.johnrengelman.shadow" version "6.1.0"
-    id "io.micronaut.application" version '1.1.0'
 }
 
 version "0.1"
@@ -12,30 +11,38 @@ repositories {
     jcenter()
 }
 
-micronaut {
-    runtime "netty"
-    testRuntime "spock2"
-    processing {
-        incremental true
-        annotations "com.example.*"
-    }
-}
+
 
 dependencies {
+    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
+    compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+    compileOnly "io.micronaut:micronaut-inject-groovy"
     compileOnly("io.micronaut.data:micronaut-data-processor")
+    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
     implementation("io.micronaut:micronaut-validation")
-    implementation("io.micronaut.groovy:micronaut-runtime-groovy")
+    implementation("io.micronaut:micronaut-runtime-groovy")
+    implementation "io.micronaut:micronaut-http-server-netty"
+
     implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut.flyway:micronaut-flyway")
-    implementation("io.micronaut.sql:micronaut-jdbc-tomcat")
+    implementation("io.micronaut.configuration:micronaut-flyway")
+    implementation("io.micronaut.configuration:micronaut-jdbc-tomcat")
     implementation("io.micronaut.data:micronaut-data-jdbc")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+    runtimeOnly("ch.qos.logback:logback-classic:1.2.3")
+    runtimeOnly("org.mariadb.jdbc:mariadb-java-client:2.7.0")
+
+    testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation("org.spockframework:spock-core") {
+        exclude group: "org.codehaus.groovy", module: "groovy-all"
+    }
+    testImplementation "io.micronaut:micronaut-inject-groovy"
+    testImplementation "io.micronaut.test:micronaut-test-spock"
+    testImplementation "io.micronaut.test:micronaut-test-junit5"
+
     testImplementation("org.testcontainers:mariadb:1.15.0-rc1")
 }
 
-mainClassName = "com.example.Application"
 java {
     sourceCompatibility = JavaVersion.toVersion('11')
     targetCompatibility = JavaVersion.toVersion('11')
