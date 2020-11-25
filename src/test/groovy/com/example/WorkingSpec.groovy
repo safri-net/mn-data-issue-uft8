@@ -48,6 +48,12 @@ class WorkingSpec extends Specification implements TestPropertyProvider {
 
         then:
         e.name == "update"
+
+        when:
+        e = repository.findById(e.id).get()
+
+        then:
+        e.name == "update"
     }
 
     @Override
